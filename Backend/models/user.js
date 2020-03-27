@@ -47,4 +47,4 @@ userSchema.methods.gravatar = function () {
     return `https://gravatar.com/avatar/${md5}?s=200&d=retro`
 }
 
-module.exports = mongoose.model('user', userSchema)
+module.exports = mongoose.model('Users', userSchema)

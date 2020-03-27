@@ -13,5 +13,5 @@ const ProductSchema = Schema({
 })
 
 //una vex el modelo ya esta creado, se necesita exportar para poder ser usado en otras clases
-module.exports = mongoose.model('Product', ProductSchema)
+module.exports = mongoose.model('Products', ProductSchema)
 

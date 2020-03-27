@@ -10,6 +10,7 @@ const config = require('./config')
 //Requerido para iniciar la coneccion con la base de datos
 mongoose.connect(config.db, {
   useUnifiedTopology: true,
+  useCreateIndex: true,
   useNewUrlParser: true,
   useFindAndModify: false,
 })
