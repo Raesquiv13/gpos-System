@@ -5,7 +5,7 @@ const Schema = mongoose.Schema
 const crypto = require('crypto')
 
 //libreria para encriptar
-const bcrypt = required('bcrypt-nodejs')
+const bcrypt = require('bcrypt-nodejs')
 
 
 //modelo de base de datos
@@ -20,7 +20,7 @@ const userSchema = new Schema({
 
 
 //Esta funcion es para trabajar antes de crear el modelo
-userSchema.pre('save', (next) => {
+userSchema.pre('save', function (next) {
     let user = this
     if (!user.isModified('password')) return next()
 
@@ -42,7 +42,7 @@ userSchema.pre('save', (next) => {
 //Para agregar un avatar, utilizara el del correo que se utilice o si no tiene le agregara uno por defecto
 userSchema.methods.gravatar = function () {
     if (!this.email) return `https://gravatar.com/avatar/?s=200&d=retro`
-    
+
     const md5 = crypto.createHash('md5').update(this.email).digest('hex')
     return `https://gravatar.com/avatar/${md5}?s=200&d=retro`
 }

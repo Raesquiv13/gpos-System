@@ -55,7 +55,7 @@ function updateProduct(req, res) {
     })
 }
 
-function deleteProduct(id) {
+function deleteProduct(req, res) {
     let productId = req.params.productId
 
     Product.findById(productId, (err, product) => {
