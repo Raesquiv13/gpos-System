@@ -22,8 +22,8 @@ api.delete('/product/:productId', ProductController.deleteProduct)
 
 
 //Private route to authenticate
-api.get('/private', auth.isAuth, function(req, res){
-    res.status(200).send({message: `Tienes acceso`})
+api.get('/private', auth, (req, res) => {
+    res.status(200).send({ message: `Tienes acceso` })
 })
 
 
