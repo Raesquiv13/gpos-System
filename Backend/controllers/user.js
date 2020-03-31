@@ -18,8 +18,8 @@ function signUp(req, res) {
     })
 }
 
-function signIn() {
-    user.find({ email: req.body.email}, (err,user)=>{
+function signIn(req, res) {
+    User.find({ email: req.body.email}, (err,user)=>{
         if(err)return res.status(500).send({message: `Error al solicitar email: ${err}`})
         if(!user) return res.status(404).send({message: `No existe el usuario ${err}`})
 

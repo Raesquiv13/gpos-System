@@ -16,7 +16,7 @@ function getProduct(req, res) {
 function getProducts(req, res) {
     //al escribir {} en el parametro de find, le decimos al modelo que nos de todo los resultados que tiene guardados
     Product.find({}, (err, products) => {
-        if (err) return res.status(500).send(`Error al realizar la peticion: ${err}`)
+        if (err) return res.status(500).send(`Error al realizar la petición: ${err}`)
         if (!products) return res.status(404).send({ message: `No existen productos` })
 
         res.status(200).send({ products })
