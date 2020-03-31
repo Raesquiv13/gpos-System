@@ -30,6 +30,7 @@ function saveProduct(req, res) {
 
     //se llena el modelo con los datos que vienen del request
     let product = new Product()
+    product.userEmail = req.body.userEmail
     product.name = req.body.name
     product.picture = req.body.picture
     product.price = req.body.price
