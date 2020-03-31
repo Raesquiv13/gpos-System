@@ -5,6 +5,7 @@ const Schema = mongoose.Schema
 
 
 const ProductSchema = Schema({
+    userEmail: { type: String, unique: true, lowercase: true },
     name: String,
     picture: String,
     price: { type: Number, default: 0 },
