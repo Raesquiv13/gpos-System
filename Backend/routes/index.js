@@ -15,6 +15,7 @@ const auth = require('../middlewares/auth')
 
 //GET
 api.get('/products', ProductController.getProducts)
+api.get('/products/:userOwner', ProductController.getProductsByUserOwner)
 api.get('/product/:productId', ProductController.getProduct)
 
 //POST
