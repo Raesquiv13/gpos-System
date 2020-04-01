@@ -4,9 +4,11 @@ const express = require('express')
 const api = express.Router()
 
 //imports de las clases que he creado
+const auth = require('../middlewares/auth')
 const ProductController = require('../controllers/product')
 const UserController = require('../controllers/user')
-const auth = require('../middlewares/auth')
+
+
 
 
 
@@ -29,10 +31,10 @@ api.delete('/product/:productId', ProductController.deleteProduct)
 
 
 //Autenticacion para rutas privadas, se necesita agregar el middleware auth a la par de la ruta.
-api.get('/private', auth, (req, res) => {
-    res.status(200).send({ message: `Tienes acceso` })
+api.get('/private', auth, function (req, res) {
+    console.log("Id del usuario: "+req.user)
+    res.status(200).send({message: `Tienes acceso`})
 })
-
 
 
 
@@ -41,7 +43,7 @@ api.get('/private', auth, (req, res) => {
 //POST
 api.post('/signup', UserController.signUp)
 
-api.post('/signin',UserController.signIn)
+api.post('/signin', UserController.signIn)
 
 
 module.exports = api

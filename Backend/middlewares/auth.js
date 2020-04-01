@@ -1,6 +1,6 @@
 'use strict'
 
-const service = require('../services')
+const Service = require('../services')
 
 function isAuth(req, res, next) {
     //verifica si existe autorizacion
@@ -10,8 +10,7 @@ function isAuth(req, res, next) {
 
     //Toma el token y lo decodifica
     const token = req.headers.authorization.split(" ")[1]
-
-    service.decodeToken(token)
+    Service.decodeToken(token)
         .then(response => {
             req.user = response
             next()
