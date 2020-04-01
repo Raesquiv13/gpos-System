@@ -1,6 +1,5 @@
 'use strict'
 
-const mongoose = require('mongoose')
 const User = require('../models/user')
 const service = require('../services')
 
@@ -23,10 +22,11 @@ function signIn(req, res) {
         if(err)return res.status(500).send({message: `Error al solicitar email: ${err}`})
         if(!user) return res.status(404).send({message: `No existe el usuario ${err}`})
 
-        req.user = user
+        req.user = user[0]
+        
         res.status(200).send({
             message:`Te has logueado correctamente`,
-            token: service.createToken(user)
+            token: service.createToken(user[0])
         })
 
 
