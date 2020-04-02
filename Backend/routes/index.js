@@ -9,20 +9,11 @@ const ProductController = require('../controllers/product')
 const UserController = require('../controllers/user')
 
 
-//tobe delete
-const Products = require('../models/products')
-const Users = require('../models/user')
-
-
-
-
-
 
 //Products----------------------------------------------------------------------------------------------------
 
 //GET
 api.get('/products', ProductController.getProducts)
-api.get('/products/:userOwner', ProductController.getProductsByUserOwner)
 api.get('/product/:productId', ProductController.getProduct)
 
 //POST
@@ -45,30 +36,7 @@ api.get('/private', auth, function (req, res) {
 
 //Private
 //GET
-api.get('/private/products', auth, function (req, res) {
-
-    let userOwnerId = req.user
-    Users.findById(userOwnerId, (err, user) => {
-        if (err) return res.status(500).send(`Error al realizar la peticion: ${err}`)
-        if (!user) return res.status(404).send({ message: `El usuario no existe` })
-
-        //what the system needs to search, we user the userOwner that is a key of the JSOn of Product model
-        var query = { "userOwner": user.email };
-
-        Products.find(query, (err, products) => {
-            if (err) return res.status(500).send(`Error al realizar la peticion: ${err}`)
-            if (!products) return res.status(404).send({ message: `No existen productos para el usuario ${userOwner}` })
-
-            res.status(200).send({ products })
-        })
-
-
-
-    })
-
-
-
-})
+api.get('/private/products', auth, ProductController.getProductListByUserOnwer)
 
 
 
