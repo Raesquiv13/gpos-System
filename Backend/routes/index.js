@@ -10,14 +10,10 @@ const UserController = require('../controllers/user')
 
 
 
-
-
-
 //Products----------------------------------------------------------------------------------------------------
 
 //GET
 api.get('/products', ProductController.getProducts)
-api.get('/products/:userOwner', ProductController.getProductsByUserOwner)
 api.get('/product/:productId', ProductController.getProduct)
 
 //POST
@@ -32,9 +28,15 @@ api.delete('/product/:productId', ProductController.deleteProduct)
 
 //Autenticacion para rutas privadas, se necesita agregar el middleware auth a la par de la ruta.
 api.get('/private', auth, function (req, res) {
-    console.log("Id del usuario: "+req.user)
-    res.status(200).send({message: `Tienes acceso`})
+    console.log("Id del usuario: " + req.user)
+    res.status(200).send({ message: `Tienes acceso` })
 })
+
+
+
+//Private
+//GET
+api.get('/private/products', auth, ProductController.getProductListByUserOnwer)
 
 
 

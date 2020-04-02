@@ -1,10 +1,12 @@
 'use strict'
-const Product = require('../models/products')
+const Products = require('../models/products')
+const Users = require('../models/user')
+
 
 function getProduct(req, res) {
     let productId = req.params.productId
 
-    Product.findById(productId, (err, product) => {
+    Products.findById(productId, (err, product) => {
         if (err) return res.status(500).send(`Error al realizar la peticion: ${err}`)
         if (!product) return res.status(404).send({ message: `El producto no existe` })
 
@@ -15,7 +17,7 @@ function getProduct(req, res) {
 
 function getProducts(req, res) {
     //al escribir {} en el parametro de find, le decimos al modelo que nos de todo los resultados que tiene guardados
-    Product.find({}, (err, products) => {
+    Products.find({}, (err, products) => {
         if (err) return res.status(500).send(`Error al realizar la petición: ${err}`)
         if (!products) return res.status(404).send({ message: `No existen productos` })
 
@@ -24,25 +26,41 @@ function getProducts(req, res) {
     })
 }
 
-function getProductsByUserOwner(req, res) {
-    let userOwner = req.params.userOwner
-    //what the system needs to search, we user the userOwner that is a key of the JSOn of Product model
-    var query = { "userOwner": userOwner };
 
-    Product.find(query, (err, products) => {
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
+function getProductListByUserOnwer(req, res) {
+    
+    let userOwnerId = req.user
+    Users.findById(userOwnerId, (err, user) => {
         if (err) return res.status(500).send(`Error al realizar la peticion: ${err}`)
-        if (!products) return res.status(404).send({ message: `No existen productos para el usuario ${userOwner}` })
+        if (!user) return res.status(404).send({ message: `El usuario no existe` })
 
-        res.status(200).send({ products })
+        //what the system needs to search, we user the userOwner that is a key of the JSOn of Product model
+        var query = { "userOwner": user.email };
+
+        Products.find(query, (err, products) => {
+            if (err) return res.status(500).send(`Error al realizar la peticion: ${err}`)
+            if (!products) return res.status(404).send({ message: `No existen productos para el usuario ${userOwner}` })
+
+            res.status(200).send({ products })
+        })
     })
 }
+
+
+
+
 
 function saveProduct(req, res) {
     console.log('POST /api/product')
     console.log(req.body)
 
     //se llena el modelo con los datos que vienen del request
-    let product = new Product()
+    let product = new Products()
     product.userOwner = req.body.userOwner
     product.name = req.body.name
     product.picture = req.body.picture
@@ -62,7 +80,7 @@ function saveProduct(req, res) {
 function updateProduct(req, res) {
     let productId = req.params.productId
     let update = req.body
-    Product.findByIdAndUpdate(productId, update, (err, productUpdated) => {
+    Products.findByIdAndUpdate(productId, update, (err, productUpdated) => {
         if (err) return res.status(500).send({ message: `Error al actualizar el producto: ${err}` })
 
         res.status(200).send({ product: productUpdated })
@@ -72,7 +90,7 @@ function updateProduct(req, res) {
 function deleteProduct(req, res) {
     let productId = req.params.productId
 
-    Product.findById(productId, (err, product) => {
+    Products.findById(productId, (err, product) => {
         if (err) return res.status(500).send({ message: `Error al borrar producto: ${err}` })
 
         product.remove(err => {
@@ -88,7 +106,7 @@ function deleteProduct(req, res) {
 module.exports = {
     getProduct,
     getProducts,
-    getProductsByUserOwner,
+    getProductListByUserOnwer,
     saveProduct,
     updateProduct,
     deleteProduct
