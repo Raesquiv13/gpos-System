@@ -1,10 +1,10 @@
 'use strict'
 
-const User = require('../models/user')
+const Users= require('../models/users')
 const service = require('../services')
 
 function signUp(req, res) {
-    const user = new User({
+    const user = new Users({
         email: req.body.email,
         displayName: req.body.displayName,
         password: req.body.password
@@ -18,7 +18,7 @@ function signUp(req, res) {
 }
 
 function signIn(req, res) {
-    User.find({ email: req.body.email}, (err,user)=>{
+    Users.find({ email: req.body.email}, (err,user)=>{
         if(err)return res.status(500).send({message: `Error al solicitar email: ${err}`})
         if(!user) return res.status(404).send({message: `No existe el usuario ${err}`})
 

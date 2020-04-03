@@ -1,6 +1,6 @@
 'use strict'
 const Products = require('../models/products')
-const Users = require('../models/user')
+const Users = require('../models/users')
 
 
 function getProduct(req, res) {
@@ -39,7 +39,7 @@ function getProductListByUserOnwer(req, res) {
         if (err) return res.status(500).send(`Error al realizar la peticion: ${err}`)
         if (!user) return res.status(404).send({ message: `El usuario no existe` })
 
-        //what the system needs to search, we user the userOwner that is a key of the JSOn of Product model
+        //what the system needs to search, we use the userOwner that is a key of the JSOn of Product model
         var query = { "userOwner": user.email };
 
         Products.find(query, (err, products) => {

@@ -5,8 +5,8 @@ const api = express.Router()
 
 //imports de las clases que he creado
 const auth = require('../middlewares/auth')
-const ProductController = require('../controllers/product')
-const UserController = require('../controllers/user')
+const ProductController = require('../controllers/products')
+const UserController = require('../controllers/users')
 
 
 
