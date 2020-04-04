@@ -3,6 +3,28 @@
 const Users= require('../models/users')
 const service = require('../services')
 
+/**
+ *** This function is used to: 
+  * Sign up a new user to have access to some private routes.
+  *
+ *** Information about parameters.
+  ** @param req It is the request of the API.
+  * The values to fill the model @var Users come in the request body @var req.body
+  * The model is stored in the variable @var user
+  *
+  * 
+  *  @param res It is the response of the API.
+  * The function will response:
+  * 
+  * If everything is ok.
+  * status : 200 
+  * @var token : {the Jason Web Token (JWY) that system generates.
+  * 
+  * If something is wrong:
+  * status : 500
+  * Error al crear usuario: @var err
+  * 
+**/
 function signUp(req, res) {
     const user = new Users({
         email: req.body.email,
@@ -17,6 +39,30 @@ function signUp(req, res) {
     })
 }
 
+/**
+ *** This function is used to: 
+  * Sign in an internal user to have access to some private routes.
+  *
+  * 
+ *** Information about parameters.
+  ** @param req It is the request of the API.
+  * You need the @var email that comes in the request body @var req.body.email
+  * to check in the data base if the user was already created.
+  * 
+  * 
+  *  @param res It is the response of the API.
+  * The function will response:
+  * 
+  * If everything is ok.
+  * status : 200 
+  * Te has logueado correctamente
+  * @var token : {the Jason Web Token (JWY) that system generates.
+  * 
+  * If something is wrong:
+  * status : 500
+  * Error al solicitar email: @var err
+  * 
+**/
 function signIn(req, res) {
     Users.find({ email: req.body.email}, (err,user)=>{
         if(err)return res.status(500).send({message: `Error al solicitar email: ${err}`})

@@ -4,6 +4,22 @@ const jwt = require('jwt-simple')
 const moment = require('moment')
 const config = require('../config')
 
+
+/**
+ *** This function is used to: 
+  * Create the JSON Web Token.
+  * To complete with the standard, is required to create the @var payload
+  * that contains @var sub that represents the user ID,
+  * @var iat that represents the date of creation,
+  * @var exp that represents the expiration date of the token.
+  * 
+  * 
+  * A secrete value @var config.SECRET_TOKEN is required to confirm the token.
+  * 
+ *** Information about parameters.
+ ** @param user It is the objet user that contains all the values of the user.
+  * 
+**/
 function createToken(user) {
     const payload = {
         sub: user._id,
@@ -14,7 +30,21 @@ function createToken(user) {
     return jwt.encode(payload, config.SECRET_TOKEN)
 }
 
-
+/**
+ *** This function is used to: 
+  * decode the JSON Web Token.
+  * A @function Promise is required to reuse the function in others part of the project.
+  * System needs to get back the payload based on token.
+  * System will check the expiration date,
+  * If the token stil works, system will send the user ID. 
+  * 
+  * 
+  * A secrete value @var config.SECRET_TOKEN is required to confirm the token.
+  * 
+ *** Information about parameters.
+ ** @param token
+  * 
+**/
 function decodeToken(token) {
     const decoded = new Promise((resolve, reject) => {
         try {
