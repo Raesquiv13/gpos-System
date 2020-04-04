@@ -30,6 +30,7 @@ function createToken(user) {
     return jwt.encode(payload, config.SECRET_TOKEN)
 }
 
+
 /**
  *** This function is used to: 
   * decode the JSON Web Token.
