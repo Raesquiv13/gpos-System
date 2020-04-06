@@ -1,7 +1,0 @@
-abrir cmd en la carpeta donde esta el mongodb instalado
-
-C:\Program Files\MongoDB\Server\4.2\bin
-
-ejecutar 
-	mongod.exe
-	mongo.exe
