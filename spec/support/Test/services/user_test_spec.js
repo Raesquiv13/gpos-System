@@ -1,16 +1,23 @@
 var userService = require('../../../../services/users')
 
+var request = require("request");
+
+var Qase = require('../../Qase/API')
+
+
 describe('Validate email format', () => {
-    it('Using a correct email', () => {
+    /*it('Using a correct email', (done) => {
         //Given:
         var email = "perroloco@email.com"
-        var expectedResult = true
-        
+        var expectedResult = false
+
+
         //When:
         var actualResult = userService.validateEmail(email)
-        
+
         //Then:
         expect(actualResult).toBe(expectedResult)
+
     })
 
     it('Using a incorrect email', () => {
@@ -53,6 +60,20 @@ describe('Validate email format', () => {
             expect(result).toBe(expectedResult)
 
         })
+    })*/
+
+
+    it('testing API de Qase', (done) => {
+
+        Qase.getAllProjects(function(err, response){
+            var projectTitle = response.body.result.entities[0].title
+            expect(projectTitle).toBe("gpos-system-backend")
+            //expect(response.statusCode).toBe(200)
+            done()
+
+        })
+        
     })
 
 })
+
