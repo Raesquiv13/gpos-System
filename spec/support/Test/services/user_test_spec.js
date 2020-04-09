@@ -1,4 +1,4 @@
-var userService = require('../../../services/users')
+var userService = require('../../../../services/users')
 
 describe('Validate email format', () => {
     it('Using a correct email', () => {
