@@ -2,13 +2,28 @@
 
 const utils = require('../../../../utils/utils')
 
-function getSuitesIdsUndesPaternSuite(paternSuiteId, suitesResponse) {
+/**
+ *** This function is used to: 
+  * Get all ids of the suites under a parent suite in Qase.
+  *  
+  * 
+ *** Information about parameters.
+ ** @param parentSuiteId It is the ID of the parent suite.
+  * 
+ ** @param suitesResponse It is the list of suites under GPOS project.
+  * 
+  * 
+  * The function will return:
+  * The list of suites IDs @var globalSuiteIdList
+  *
+**/
+function getSuitesIdsUnderParentSuite(parentSuiteId, suitesResponse) {
     var globalSuiteIdList = []
     var suitesList = suitesResponse.body.result.entities
     var suiteIdList = []
     var totalGlobalSuiteId = 0
-    globalSuiteIdList.push(paternSuiteId)
-    suiteIdList.push(paternSuiteId)
+    globalSuiteIdList.push(parentSuiteId)
+    suiteIdList.push(parentSuiteId)
     var continueLoop = true
     while (continueLoop) {
         totalGlobalSuiteId = globalSuiteIdList.length
@@ -29,7 +44,22 @@ function getSuitesIdsUndesPaternSuite(paternSuiteId, suitesResponse) {
     return globalSuiteIdList
 }
 
-function getTestCasesIdsUnderPaternSuiteId(suites_ids,testCasesResponse){
+/**
+ *** This function is used to: 
+  * Get all ids of the test cases under GPOS project in Qase.
+  *  
+  * 
+ *** Information about parameters.
+ ** @param suites_ids It is the IDs of the suites using the hierarchy of the parent suited in Qase.
+  * 
+ ** @param testCasesResponse It is the list of test cases under GPOS project.
+  * 
+  * 
+  * The function will return:
+  * The list of test cases IDs @var globalTestCasesIdList
+  *
+**/
+function getTestCasesIdsUnderParentSuitesIds(suites_ids, testCasesResponse) {
     var testCasesList = testCasesResponse.body.result.entities
     var globalTestCasesIdList = []
     for (const index in suites_ids) {
@@ -45,6 +75,6 @@ function getTestCasesIdsUnderPaternSuiteId(suites_ids,testCasesResponse){
 }
 
 module.exports = {
-    getSuitesIdsUndesPaternSuite,
-    getTestCasesIdsUnderPaternSuiteId
+    getSuitesIdsUnderParentSuite,
+    getTestCasesIdsUnderParentSuitesIds
 }

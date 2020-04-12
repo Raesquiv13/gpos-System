@@ -10,7 +10,7 @@ if (testingConfig.CREATE_AUTOMATED_TEST_RUN) {
             //============================Suites============================================================
             qaseApi.getAllSuites(function (err, response) {
                 var suites_ids = []
-                suites_ids = qaseProject.getSuitesIdsUndesPaternSuite(UNIT_TESTING_ID, response)
+                suites_ids = qaseProject.getSuitesIdsUnderParentSuite(UNIT_TESTING_ID, response)
                 //============================Test cases=====================================================
                 qaseApi.getAllTestCases(function (err, response) {
                     var testCases_ids = []
@@ -36,11 +36,11 @@ if (testingConfig.CREATE_AUTOMATED_TEST_RUN) {
             //============================Suites============================================================
             qaseApi.getAllSuites(function (err, response) {
                 var suites_ids = []
-                suites_ids = qaseProject.getSuitesIdsUndesPaternSuite(REGRESSION_TESTING_ID, response)
+                suites_ids = qaseProject.getSuitesIdsUnderParentSuite(REGRESSION_TESTING_ID, response)
                 //============================Test cases=====================================================
                 qaseApi.getAllTestCases(function (err, response) {
                     var testCases_ids = []
-                    testCases_ids = qaseProject.getTestCasesIdsUnderPaternSuiteId(suites_ids, response)
+                    testCases_ids = qaseProject.getTestCasesIdsUnderParentSuitesIds(suites_ids, response)
                     //============================Test run creation=========================================
                     var actualDate = utils.getActualDate()
                     var testRunObj = {
