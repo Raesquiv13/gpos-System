@@ -14,7 +14,7 @@ if (testingConfig.CREATE_AUTOMATED_TEST_RUN) {
                 //============================Test cases=====================================================
                 qaseApi.getAllTestCases(function (err, response) {
                     var testCases_ids = []
-                    testCases_ids = qaseProject.getTestCasesIdsUnderPaternSuiteId(suites_ids, response)
+                    testCases_ids = qaseProject.getTestCasesIdsUnderParentSuitesIds(suites_ids, response)
                     //============================Test run creation=========================================
                     var actualDate = utils.getActualDate()
                     var testRunObj = {
