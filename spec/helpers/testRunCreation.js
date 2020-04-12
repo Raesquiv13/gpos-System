@@ -44,8 +44,8 @@ if (testingConfig.CREATE_AUTOMATED_TEST_RUN) {
                     //============================Test run creation=========================================
                     var actualDate = utils.getActualDate()
                     var testRunObj = {
-                        "title": "Automated Unit Testing " + actualDate,
-                        "description": "all test cases automated under unit testing suite",
+                        "title": "Automated Regression Testing " + actualDate,
+                        "description": "all test cases automated under Regression testing suite",
                         "environment_id": null,
                         "cases": testCases_ids
                     }
