@@ -148,9 +148,26 @@ function getAllTestCases(res) {
     })
 }
 
+function addNewTestRunResult(runId, testCaseResult, res) {
+    var options = {
+        headers: headers,
+        url: 'https://api.qase.io/v1/result/' + projectCode + '/' + runId ,
+        body: testCaseResult,
+        json: true
+    }
+    request.post(options, res, (err, response, body) => {
+        if (err) {
+            console.log(`Error al realizar la peticion: ${err}`)
+            res = err
+        } else { res = response }
+        return res
+    })
+}
+
 module.exports = {
     getAllProjects,
     createNewTestRun,
     getAllSuites,
-    getAllTestCases
+    getAllTestCases,
+    addNewTestRunResult
 }

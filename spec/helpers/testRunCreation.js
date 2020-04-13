@@ -24,6 +24,7 @@ if (testingConfig.CREATE_AUTOMATED_TEST_RUN) {
                         "cases": testCases_ids
                     }
                     qaseApi.createNewTestRun(testRunObj, function (err, response) {
+                        testingConfig.UNIT_TESTING_TEST_RUN_ID = response.body.result.id
                         expect(response.statusCode).toBe(200)
                         done()
                     })
@@ -31,7 +32,7 @@ if (testingConfig.CREATE_AUTOMATED_TEST_RUN) {
             })
         })
 
-        it('Regression Testing', (done) => {
+       /* it('Regression Testing', (done) => {
             const REGRESSION_TESTING_ID = 4
             //============================Suites============================================================
             qaseApi.getAllSuites(function (err, response) {
@@ -55,6 +56,6 @@ if (testingConfig.CREATE_AUTOMATED_TEST_RUN) {
                     })
                 })
             })
-        })
+        })*/
     })
 }
