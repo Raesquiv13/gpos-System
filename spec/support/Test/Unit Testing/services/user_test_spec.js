@@ -1,7 +1,7 @@
 'use strict'
-var userService = require('../../../../services/users')
-const qaseApi = require('../../../support/Qase/API')
-const testingConfig = require('../../../../spec/support/config/config')
+var userService = require('../../../../../services/users')
+const qaseApi = require('../../../Qase/API')
+const testingConfig = require('../../../config/config')
 
 describe('Validate email format', () => {
     it('Using a correct email', (done) => {
@@ -38,6 +38,7 @@ describe('Validate email format', () => {
 
         //Then:
         var status = stepOneStatus == true ? 'passed' : 'failed'
+        expect(status).toBe(true)
 
 
         //TEST CASE RESULT-----------------------------------------------------------------------------
