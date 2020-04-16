@@ -37,8 +37,8 @@ describe('Validate email format', () => {
         )
 
         //Then:
+        expect(stepOneStatus).toBe(true)
         var status = stepOneStatus == true ? 'passed' : 'failed'
-        expect(status).toBe(true)
 
 
         //TEST CASE RESULT-----------------------------------------------------------------------------
