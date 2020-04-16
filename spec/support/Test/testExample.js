@@ -1,23 +1,37 @@
 'use strict'
 const qaseApi = require('../../../Qase/API')
 const testingConfig = require('../../../config/config')
-var testCaseResult = []
+
+// The variable testCaseResult needs to be created eventhough test case will not be reported.
+var testCaseResult = {
+    "case_id": 0,
+    "time": 0,
+    "status": "",
+    "member_id": 0,
+    "comment": "",
+    "defect": false,
+    "steps": []
+}
 
 describe('Standard automated test format', () => {
 
-    beforeEach(function () {
-        testCaseResult = {
-            "case_id": 0,
-            "time": 0,
-            "status": "",
-            "member_id": 0,
-            "comment": "",
-            "defect": false,
-            "steps": []
-        }
-    })
-
-
+    //if test case needs to be reported
+    if (testingConfig.CREATE_AUTOMATED_TEST_RUN) {
+        //Extend the time to wait, sometime Qase needs more time
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
+        beforeEach(function () {
+            //The variable testCaseResult needs to be resetted for each new test
+            testCaseResult = {
+                "case_id": 0,
+                "time": 0,
+                "status": "",
+                "member_id": 0,
+                "comment": "",
+                "defect": false,
+                "steps": []
+            }
+        })
+    }
 
 
 
@@ -85,31 +99,31 @@ describe('Standard automated test format', () => {
 
 
 
-
-    afterEach(function (done) {
-        //jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
-        qaseApi.addNewTestRunResult(testingConfig.UNIT_TESTING_TEST_RUN_ID, testCaseResult,
-            function (err, response) {
-                if (err) {
-                    console.log("Error, adding automatic results to Qase.")
-                    console.log(err)
-                } else if (response.statusCode == 200) {
-                    if (response.body.status == false) {
-                        console.log("Error, Qase API response status 200 but there is an error included in the response body.")
-                        console.log(response.body)
+    if (testingConfig.CREATE_AUTOMATED_TEST_RUN) {
+       //Reporting to Qase
+        afterEach(function (done) {
+            qaseApi.addNewTestRunResult(testingConfig.UNIT_TESTING_TEST_RUN_ID, testCaseResult,
+                function (err, response) {
+                    if (err) {
+                        console.log("Error, adding automatic results to Qase.")
+                        console.log(err)
+                    } else if (response.statusCode == 200) {
+                        if (response.body.status == false) {
+                            console.log("Error, Qase API response status 200 but there is an error included in the response body.")
+                            console.log(response.body)
+                        } else {
+                            console.log("Automatic results was added to Qase successfully.")
+                        }
                     } else {
-                        console.log("Automatic results was added to Qase successfully.")
+                        console.log("Error, there are unknow issues adding automatic results to Qase.")
+                        console.log("Status code: " + response.statusCode)
+                        console.log("message:")
+                        console.log(response.body.message)
                     }
-                } else {
-                    console.log("Error, there are unknow issues adding automatic results to Qase.")
-                    console.log("Status code: " + response.statusCode)
-                    console.log("message:")
-                    console.log(response.body.message)
-                }
-                done()
-            })
-    })
-
+                    done()
+                })
+        })
+    }
 
 
 })

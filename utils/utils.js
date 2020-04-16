@@ -37,8 +37,7 @@ function removeItemFromArr(arr, item) {
 **/
 function getActualDate() {
     var date = new Date()
-    var dateFormatted = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear()
-        + "T" + date.getHours() + ":" + date.getMinutes()
+    var dateFormatted = date.getDate() + "-" + date.getMonth() + "-" + date.getFullYear()
     return dateFormatted
 }
 

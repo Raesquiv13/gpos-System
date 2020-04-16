@@ -5,9 +5,7 @@ const testingConfig = require('../../spec/support/config/config')
 const qaseProject = require('../support/Qase/project')
 
 if (testingConfig.CREATE_AUTOMATED_TEST_RUN) {
-
-
-
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
     describe('Automated test run creation', function () {
         var testRunObj = []
         beforeEach(function () {
