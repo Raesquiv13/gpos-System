@@ -7,6 +7,7 @@ const qaseProject = require('../support/Qase/project')
 if (testingConfig.CREATE_AUTOMATED_TEST_RUN == "false") {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
     describe('Automated test run creation', function () {
+        console.log("Automated test run creation")
         var testRunObj = []
         beforeEach(function () {
             testRunObj = {
@@ -18,6 +19,7 @@ if (testingConfig.CREATE_AUTOMATED_TEST_RUN == "false") {
         })
 
         it('Unit Testing', function (done) {
+            console.log("Unit Testing")
             const UNIT_TESTING_ID = 13
             //============================Suites============================================================
             qaseApi.getAllSuites(function (err, response) {

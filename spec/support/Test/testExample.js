@@ -14,7 +14,7 @@ var testCaseResult = {
 }
 
 describe('Standard automated test format', () => {
-
+    console.log("describe text")
     //if test case needs to be reported
     if (testingConfig.CREATE_AUTOMATED_TEST_RUN == "false") {
         //Extend the time to wait, sometime Qase needs more time
@@ -36,6 +36,7 @@ describe('Standard automated test format', () => {
 
 
     it("Test's template for automated test execution in Qase", function () {
+        console.log("it text")
         //TEST CASE RESULT PRE SET-UP----------------------------------------------------------------
         let startExecution = new Date().getTime()
         testCaseResult.case_id = 00

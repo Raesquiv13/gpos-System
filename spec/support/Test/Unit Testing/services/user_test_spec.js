@@ -15,6 +15,8 @@ var testCaseResult = {
 }
 
 describe('Validate email format', () => {
+    console.log("Validate email format")
+
     if (testingConfig.CREATE_AUTOMATED_TEST_RUN == "false") {
         beforeEach(function () {
             jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
@@ -31,6 +33,7 @@ describe('Validate email format', () => {
     }
 
     it('Using a correct email', function () {
+        console.log("Using a correct email")
         //TEST CASE RESULT PRE SET-UP----------------------------------------------------------------
         let startExecution = new Date().getTime()
         testCaseResult.case_id = 11
@@ -71,6 +74,7 @@ describe('Validate email format', () => {
 
 
     it('Using a incorrect email', () => {
+        console.log("Using a incorrect email")
         //TEST CASE RESULT PRE SET-UP----------------------------------------------------------------
         let startExecution = new Date().getTime()
         testCaseResult.case_id = 12
@@ -111,6 +115,7 @@ describe('Validate email format', () => {
 
 
     it('Using a list of different emails', () => {
+        console.log("Using a list of different emails")
         //TEST CASE RESULT PRE SET-UP----------------------------------------------------------------
         let startExecution = new Date().getTime()
         testCaseResult.case_id = 13
