@@ -12,14 +12,16 @@ var testCaseResult = {
     "defect": false,
     "steps": []
 }
+let startExecution
 
 describe('Standard automated test format', () => {
     console.log("describe text")
     //if test case needs to be reported
-    if (testingConfig.CREATE_AUTOMATED_TEST_RUN == "false") {
-        //Extend the time to wait, sometime Qase needs more time
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
+    if (testingConfig.CREATE_AUTOMATED_TEST_RUN == "true") {
         beforeEach(function () {
+            startExecution = new Date().getTime()
+            //Extend the time to wait, sometime Qase needs more time
+            jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
             //The variable testCaseResult needs to be resetted for each new test
             testCaseResult = {
                 "case_id": 0,
@@ -38,7 +40,6 @@ describe('Standard automated test format', () => {
     it("Test's template for automated test execution in Qase", function () {
         console.log("it text")
         //TEST CASE RESULT PRE SET-UP----------------------------------------------------------------
-        let startExecution = new Date().getTime()
         testCaseResult.case_id = 00
         testCaseResult.member_id = 1 //define automation account is required
 
@@ -86,8 +87,6 @@ describe('Standard automated test format', () => {
 
 
         //TEST CASE RESULT-----------------------------------------------------------------------------
-        let endExecution = new Date().getTime()
-        testCaseResult.time = endExecution - startExecution
         testCaseResult.status = status
         testCaseResult.defect = status == 'passed' ? false : true
         if (status == 'passed') {
@@ -100,9 +99,11 @@ describe('Standard automated test format', () => {
 
 
 
-    if (testingConfig.CREATE_AUTOMATED_TEST_RUN == "false") {
-       //Reporting to Qase
+    if (testingConfig.CREATE_AUTOMATED_TEST_RUN == "true") {
+        //Reporting to Qase
         afterEach(function (done) {
+            let endExecution = new Date().getTime()
+            testCaseResult.time = endExecution - startExecution
             qaseApi.addNewTestRunResult(testingConfig.UNIT_TESTING_TEST_RUN_ID, testCaseResult,
                 function (err, response) {
                     if (err) {

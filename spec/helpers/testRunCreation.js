@@ -4,7 +4,7 @@ const utils = require('../../utils/utils')
 const testingConfig = require('../../spec/support/config/config')
 const qaseProject = require('../support/Qase/project')
 
-if (testingConfig.CREATE_AUTOMATED_TEST_RUN == "false") {
+if (testingConfig.CREATE_AUTOMATED_TEST_RUN == "true") {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
     describe('Automated test run creation', function () {
         console.log("Automated test run creation")

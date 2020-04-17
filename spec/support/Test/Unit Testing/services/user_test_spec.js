@@ -14,11 +14,13 @@ var testCaseResult = {
     "steps": []
 }
 
+let startExecution
+
 describe('Validate email format', () => {
     console.log("Validate email format")
-
-    if (testingConfig.CREATE_AUTOMATED_TEST_RUN == "false") {
+    if (testingConfig.CREATE_AUTOMATED_TEST_RUN == "true") {
         beforeEach(function () {
+            startExecution = new Date().getTime()
             jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
             testCaseResult = {
                 "case_id": 0,
@@ -35,7 +37,6 @@ describe('Validate email format', () => {
     it('Using a correct email', function () {
         console.log("Using a correct email")
         //TEST CASE RESULT PRE SET-UP----------------------------------------------------------------
-        let startExecution = new Date().getTime()
         testCaseResult.case_id = 11
         testCaseResult.member_id = 1
 
@@ -61,8 +62,6 @@ describe('Validate email format', () => {
 
 
         //TEST CASE RESULT-----------------------------------------------------------------------------
-        let endExecution = new Date().getTime()
-        testCaseResult.time = endExecution - startExecution
         testCaseResult.status = status
         testCaseResult.defect = status == 'passed' ? false : true
         if (status == 'passed') {
@@ -76,7 +75,6 @@ describe('Validate email format', () => {
     it('Using a incorrect email', () => {
         console.log("Using a incorrect email")
         //TEST CASE RESULT PRE SET-UP----------------------------------------------------------------
-        let startExecution = new Date().getTime()
         testCaseResult.case_id = 12
         testCaseResult.member_id = 1 //define automation account is required
 
@@ -102,8 +100,6 @@ describe('Validate email format', () => {
 
 
         //TEST CASE RESULT-----------------------------------------------------------------------------
-        let endExecution = new Date().getTime()
-        testCaseResult.time = endExecution - startExecution
         testCaseResult.status = status
         testCaseResult.defect = status == 'passed' ? false : true
         if (status == 'passed') {
@@ -117,7 +113,6 @@ describe('Validate email format', () => {
     it('Using a list of different emails', () => {
         console.log("Using a list of different emails")
         //TEST CASE RESULT PRE SET-UP----------------------------------------------------------------
-        let startExecution = new Date().getTime()
         testCaseResult.case_id = 13
         testCaseResult.member_id = 1 //define automation account is required
 
@@ -165,8 +160,6 @@ describe('Validate email format', () => {
 
 
         //TEST CASE RESULT-----------------------------------------------------------------------------
-        let endExecution = new Date().getTime()
-        testCaseResult.time = endExecution - startExecution
         testCaseResult.status = status
         testCaseResult.defect = status == 'passed' ? false : true
         if (status == 'passed') {
@@ -176,8 +169,10 @@ describe('Validate email format', () => {
         }
     })
 
-    if (testingConfig.CREATE_AUTOMATED_TEST_RUN == "false") {
+    if (testingConfig.CREATE_AUTOMATED_TEST_RUN == "true") {
         afterEach(function (done) {
+            let endExecution = new Date().getTime()
+            testCaseResult.time = endExecution - startExecution
             qaseApi.addNewTestRunResult(testingConfig.UNIT_TESTING_TEST_RUN_ID, testCaseResult,
                 function (err, response) {
                     if (err) {
