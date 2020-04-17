@@ -15,7 +15,7 @@ var testCaseResult = {
 }
 
 describe('Validate email format', () => {
-    if (testingConfig.CREATE_AUTOMATED_TEST_RUN) {
+    if (testingConfig.CREATE_AUTOMATED_TEST_RUN == "false") {
         beforeEach(function () {
             jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
             testCaseResult = {
@@ -171,7 +171,7 @@ describe('Validate email format', () => {
         }
     })
 
-    if (testingConfig.CREATE_AUTOMATED_TEST_RUN) {
+    if (testingConfig.CREATE_AUTOMATED_TEST_RUN == "false") {
         afterEach(function (done) {
             qaseApi.addNewTestRunResult(testingConfig.UNIT_TESTING_TEST_RUN_ID, testCaseResult,
                 function (err, response) {

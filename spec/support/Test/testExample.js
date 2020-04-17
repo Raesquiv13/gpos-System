@@ -16,7 +16,7 @@ var testCaseResult = {
 describe('Standard automated test format', () => {
 
     //if test case needs to be reported
-    if (testingConfig.CREATE_AUTOMATED_TEST_RUN) {
+    if (testingConfig.CREATE_AUTOMATED_TEST_RUN == "false") {
         //Extend the time to wait, sometime Qase needs more time
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
         beforeEach(function () {
@@ -99,7 +99,7 @@ describe('Standard automated test format', () => {
 
 
 
-    if (testingConfig.CREATE_AUTOMATED_TEST_RUN) {
+    if (testingConfig.CREATE_AUTOMATED_TEST_RUN == "false") {
        //Reporting to Qase
         afterEach(function (done) {
             qaseApi.addNewTestRunResult(testingConfig.UNIT_TESTING_TEST_RUN_ID, testCaseResult,
