@@ -45,10 +45,13 @@ describe('Validate email format', () => {
         //Given:
         var expectedResult = true
         var email = "perroloco@email.com"
+        var actualResult = true
+        var stepOneStatus = true
+        var status = 'passed'
 
         //When:
-        var actualResult = userService.validateEmail(email)
-        var stepOneStatus = actualResult == expectedResult
+        actualResult = userService.validateEmail(email)
+        stepOneStatus = actualResult == expectedResult
         testCaseResult.steps.push({
             "position": 1,
             "status": stepOneStatus == true ? "passed" : "failed",
@@ -58,7 +61,7 @@ describe('Validate email format', () => {
 
         //Then:
         expect(stepOneStatus).toBe(true)
-        var status = stepOneStatus == true ? 'passed' : 'failed'
+        status = stepOneStatus == true ? 'passed' : 'failed'
 
 
         //TEST CASE RESULT-----------------------------------------------------------------------------
@@ -83,10 +86,13 @@ describe('Validate email format', () => {
         //Given:
         var expectedResult = false
         var email = "el perro loco "
+        var actualResult = false
+        var stepOneStatus = false
+        var status = 'failed'
 
         //When:
-        var actualResult = userService.validateEmail(email)
-        var stepOneStatus = actualResult == expectedResult
+        actualResult = userService.validateEmail(email)
+        stepOneStatus = actualResult == expectedResult
         testCaseResult.steps.push({
             "position": 1,
             "status": stepOneStatus == true ? "passed" : "failed",
@@ -96,7 +102,7 @@ describe('Validate email format', () => {
 
         //Then:
         expect(stepOneStatus).toBe(true)
-        var status = stepOneStatus == true ? 'passed' : 'failed'
+        status = stepOneStatus == true ? 'passed' : 'failed'
 
 
         //TEST CASE RESULT-----------------------------------------------------------------------------
@@ -133,14 +139,17 @@ describe('Validate email format', () => {
             "arachne@msn.com"
         ]
         var validationList = []
+        var stepOneStatus = true
+        var status = 'passed'
 
+        
         //When:
         emailList.forEach(email => {
             actualResult = userService.validateEmail(email)
             validationList.push(actualResult)
         });
 
-        var stepOneStatus = true
+
         validationList.forEach(result => {
             if (result != expectedResult) {
                 stepOneStatus = false
@@ -156,7 +165,7 @@ describe('Validate email format', () => {
 
         //Then:
         expect(stepOneStatus).toBe(true)
-        var status = stepOneStatus == true ? 'passed' : 'failed'
+        status = stepOneStatus == true ? 'passed' : 'failed'
 
 
         //TEST CASE RESULT-----------------------------------------------------------------------------

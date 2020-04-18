@@ -57,22 +57,26 @@ describe('Standard automated test format', () => {
 
         //TEST CASE FLOW------------------------------------------------------------------------------
         //Given:
-        var expectedResult = true
+        var expectedResult
+        var actualResult
+        var stepOneStatus
+        var status
 
+        
         //When:
-        var actualResult = "function/validation"
-        var stepOneStatus = actualResult == expectedResult
+        actualResult = "function/validation"
+        stepOneStatus = actualResult == expectedResult
         //If there are more of one step, remember change the position value
         testCaseResult.steps.push({
             "position": 1,
             "status": stepOneStatus == true ? "passed" : "failed",
             "comment": stepOneStatus == true ?
-                "Email validation was successfully" : "Error, there are problems validating data: "
+                "Validation was successfully" : "Error, there are problems validating data: "
         })
 
         //Then:
         expect(stepOneStatus).toBe(true) // expect validation for each step
-        var status = stepOneStatus == true ? 'passed' : 'failed'
+        status = stepOneStatus == true ? 'passed' : 'failed'
 
 
 
