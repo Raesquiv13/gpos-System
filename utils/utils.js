@@ -24,8 +24,7 @@ function removeItemFromArr(arr, item) {
 
 /**
  *** This function is used to: 
-  * Get the actual @var date with the format dd/mm/yyyyThh:mm.
-  *  
+  * Get the actual @var date with the format dd-mm-yyyy
   * 
  *** Information about parameters.
   * N/A
