@@ -1,7 +1,8 @@
 'use strict'
-const qaseApi = require('../../../Qase/API')
-const testingConfig = require('../../../config/config')
-const auth = require('../../../../../services/authorization')
+const qaseApi = require('../../../../../support/Qase/API')
+const testingConfig = require('../../../../config/config')
+const auth = require('../../../../../../services/authorization')
+const testData = require('../authorization/testData')
 
 var testCaseResult = {
     "case_id": 0,
@@ -14,8 +15,8 @@ var testCaseResult = {
 }
 let startExecution
 
-describe('Create Json Web(JWT)', () => {
-    console.log("Create Json Web(JWT)")
+describe('Create Json Web Token(JWT)', () => {
+    console.log("Create Json Web Token(JWT)")
     if (testingConfig.CREATE_AUTOMATED_TEST_RUN == "true") {
         beforeEach(function () {
             startExecution = new Date().getTime()
@@ -46,7 +47,8 @@ describe('Create Json Web(JWT)', () => {
         var userStructure = {
             email: "automated-user@gmail.com",
             displayName: "Automated user",
-            password: "asdf4321"
+            password: "asdf4321",
+            _id: "automatedUserId"
         }
         var tokenGenerated = ""
         var tokenSection = []
@@ -62,6 +64,7 @@ describe('Create Json Web(JWT)', () => {
         })
 
         tokenGenerated = auth.createToken(userStructure)
+        testData.TOKEN = tokenGenerated
         tokenSection = tokenGenerated.split('.')
         stepTwoActualResult = tokenSection.length == 3
         stepTwoStatus = stepTwoActualResult == expectedResult

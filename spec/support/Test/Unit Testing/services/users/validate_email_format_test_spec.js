@@ -1,8 +1,8 @@
 'use strict'
 'use strict'
-const userService = require('../../../../../services/users')
-const qaseApi = require('../../../Qase/API')
-const testingConfig = require('../../../config/config')
+const userService = require('../../../../../../services/users')
+const qaseApi = require('../../../../Qase/API')
+const testingConfig = require('../../../../config/config')
 
 var testCaseResult = {
     "case_id": 0,

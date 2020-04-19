@@ -14,6 +14,16 @@ var testCaseResult = {
 }
 let startExecution
 
+
+/**
+ * describe [General Title of the Scenario]
+ * it [Specific Title of the Scenario]
+ * Given [Preconditions or Initial Context]
+ * When [Event or Trigger]
+ * Then [Expected output]
+ */
+
+
 describe('Standard automated test format', () => {
     console.log("describe text")
     //if test case needs to be reported
@@ -36,7 +46,6 @@ describe('Standard automated test format', () => {
     }
 
 
-
     it("Test's template for automated test execution in Qase", function () {
         console.log("it text")
         //TEST CASE RESULT PRE SET-UP----------------------------------------------------------------
@@ -56,13 +65,13 @@ describe('Standard automated test format', () => {
 
 
         //TEST CASE FLOW------------------------------------------------------------------------------
-        //Given:
+        //Given
         var expectedResult
         var actualResult
         var stepOneStatus
         var status
 
-        
+
         //When:
         actualResult = "function/validation"
         stepOneStatus = actualResult == expectedResult
@@ -73,6 +82,7 @@ describe('Standard automated test format', () => {
             "comment": stepOneStatus == true ?
                 "Validation was successfully" : "Error, there are problems validating data: "
         })
+
 
         //Then:
         expect(stepOneStatus).toBe(true) // expect validation for each step
@@ -99,8 +109,6 @@ describe('Standard automated test format', () => {
             testCaseResult.comment = "Error, There are problems validating data"
         }
     })
-
-
 
 
     if (testingConfig.CREATE_AUTOMATED_TEST_RUN == "true") {
@@ -130,6 +138,4 @@ describe('Standard automated test format', () => {
                 })
         })
     }
-
-
 })
