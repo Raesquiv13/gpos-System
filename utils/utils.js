@@ -24,8 +24,7 @@ function removeItemFromArr(arr, item) {
 
 /**
  *** This function is used to: 
-  * Get the actual @var date with the format dd/mm/yyyyThh:mm.
-  *  
+  * Get the actual @var date with the format dd-mm-yyyy
   * 
  *** Information about parameters.
   * N/A
@@ -37,8 +36,7 @@ function removeItemFromArr(arr, item) {
 **/
 function getActualDate() {
     var date = new Date()
-    var dateFormatted = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear()
-        + "T" + date.getHours() + ":" + date.getMinutes()
+    var dateFormatted = date.getDate() + "-" + date.getMonth() + "-" + date.getFullYear()
     return dateFormatted
 }
 
